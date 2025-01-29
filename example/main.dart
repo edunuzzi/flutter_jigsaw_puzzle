@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.from(
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.blueGrey,
-          primaryColorDark: Colors.blueGrey.shade700,
+          // primaryColorDark: Colors.blueGrey.shade700,
           backgroundColor: Colors.blueGrey.shade100,
           cardColor: Colors.yellow,
           errorColor: Colors.orange,

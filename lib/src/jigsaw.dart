@@ -4,12 +4,12 @@
 import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:image/image.dart' as ui;
-
 import 'package:flutter_jigsaw_puzzle/src/error.dart';
+import 'package:image/image.dart' as ui;
 
 class JigsawPuzzle extends StatefulWidget {
   const JigsawPuzzle({
@@ -99,7 +99,7 @@ class JigsawWidgetState extends State<JigsawWidget> {
   List<List<BlockClass>> images = <List<BlockClass>>[];
   ValueNotifier<List<BlockClass>> blocksNotifier =
       ValueNotifier<List<BlockClass>>(<BlockClass>[]);
-  CarouselController? _carouselController;
+  CarouselSliderController? _carouselController;
 
   Offset _pos = Offset.zero;
   int? _index;
@@ -116,7 +116,7 @@ class JigsawWidgetState extends State<JigsawWidget> {
     if (pngBytes == null) {
       throw InvalidImageException();
     }
-    return ui.decodeImage(List<int>.from(pngBytes));
+    return ui.decodeImage(pngBytes);
   }
 
   void reset() {
@@ -181,10 +181,10 @@ class JigsawWidgetState extends State<JigsawWidget> {
 
         final ui.Image temp = ui.copyCrop(
           fullImage!,
-          xAxis.round(),
-          yAxis.round(),
-          widthPerBlockTemp.round(),
-          heightPerBlockTemp.round(),
+          x: xAxis.round(),
+          y: yAxis.round(),
+          width: widthPerBlockTemp.round(),
+          height: heightPerBlockTemp.round(),
         );
 
         final Offset offset = Offset(size!.width / 2 - widthPerBlockTemp / 2,
@@ -222,7 +222,7 @@ class JigsawWidgetState extends State<JigsawWidget> {
 
   @override
   void initState() {
-    _carouselController = CarouselController();
+    _carouselController = CarouselSliderController();
     super.initState();
   }
 
@@ -254,7 +254,8 @@ class JigsawWidgetState extends State<JigsawWidget> {
 
                       if (_index == null) {
                         _carouselController?.nextPage(
-                            duration: const Duration(microseconds: 600));
+                            duration: const Duration(microseconds: 600),
+                            curve: Curves.bounceIn);
                         setState(() {});
                       }
                     },
