@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
                     // ignore: avoid_print
                     print('finished!');
                   },
+                  //
                   // ignore: avoid_redundant_argument_values
                   snapSensitivity: .5, // Between 0 and 1
                   puzzleKey: puzzleKey,
